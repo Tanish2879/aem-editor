@@ -1,0 +1,310 @@
+.showcase {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 32px 16px;
+  background-color: var(--background-color, #fff);
+}
+
+.showcase .showcase-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* Pagination / Indicator bar */
+.showcase .showcase-pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.showcase .showcase-indicator {
+  display: block;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: #d1d5db;
+  border-radius: 4px;
+  width: 6px;
+  height: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.showcase .showcase-indicator:hover {
+  background-color: #9ca3af;
+}
+
+.showcase .showcase-indicator.active {
+  background-color: #111827;
+  height: 24px;
+  border-radius: 4px;
+}
+
+/* Slides container */
+.showcase .showcase-slides {
+  width: 100%;
+  position: relative;
+}
+
+.showcase .showcase-slide {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.showcase .showcase-slide.active {
+  display: flex;
+}
+
+/* Vehicle Media Card */
+.showcase .showcase-media {
+  width: 100%;
+  max-width: 580px;
+  aspect-ratio: 4 / 3;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgb(0 0 0 / 8%);
+  background-color: #e5e9ee;
+  position: relative;
+}
+
+.showcase .showcase-media picture,
+.showcase .showcase-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Technical Corner Brackets Content Frame */
+.showcase .showcase-content-frame {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+  padding: 36px 28px;
+}
+
+/* 4 Corner tick marks */
+.showcase .showcase-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.showcase .showcase-corner-tl {
+  top: 0;
+  left: 0;
+  border-top: 1.5px solid #a0a6b1;
+  border-left: 1.5px solid #a0a6b1;
+}
+
+.showcase .showcase-corner-tr {
+  top: 0;
+  right: 0;
+  border-top: 1.5px solid #a0a6b1;
+  border-right: 1.5px solid #a0a6b1;
+}
+
+.showcase .showcase-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1.5px solid #a0a6b1;
+  border-left: 1.5px solid #a0a6b1;
+}
+
+.showcase .showcase-corner-br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1.5px solid #a0a6b1;
+  border-right: 1.5px solid #a0a6b1;
+}
+
+/* Body Content */
+.showcase .showcase-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase .showcase-eyebrow {
+  margin: 0 0 16px;
+  font-family: var(--body-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7b828e;
+}
+
+.showcase .showcase-heading {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #111827;
+}
+
+.showcase .showcase-description {
+  margin: 0 0 28px;
+  font-family: var(--body-font-family);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555e6d;
+}
+
+.showcase .showcase-description strong {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Action Badge / Beacon Button */
+.showcase .showcase-badge-wrapper {
+  margin: 0;
+  display: inline-flex;
+}
+
+.showcase .showcase-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4100 0%, #e02400 100%);
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: 19px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgb(224 36 0 / 40%), 0 3px 8px rgb(0 0 0 / 12%);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.showcase .showcase-badge::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 65 0 / 20%) 0%, transparent 70%);
+  z-index: -1;
+  transition: opacity 0.25s ease;
+}
+
+.showcase .showcase-badge:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 12px 28px rgb(224 36 0 / 55%), 0 6px 14px rgb(0 0 0 / 18%);
+}
+
+/* Tablet Layout (min-width: 600px) */
+@media (width >= 600px) {
+  .showcase {
+    padding: 48px 32px;
+  }
+
+  .showcase .showcase-content-frame {
+    padding: 44px 36px;
+  }
+
+  .showcase .showcase-heading {
+    font-size: 32px;
+  }
+
+  .showcase .showcase-description {
+    font-size: 16px;
+  }
+}
+
+/* Desktop Layout (min-width: 900px) */
+@media (width >= 900px) {
+  .showcase {
+    padding: 64px 40px;
+  }
+
+  .showcase .showcase-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* Left vertical pagination */
+  .showcase .showcase-pagination {
+    flex-direction: column;
+    padding: 0;
+    gap: 14px;
+    align-self: center;
+  }
+
+  .showcase .showcase-indicator.active {
+    width: 5px;
+    height: 32px;
+  }
+
+  .showcase .showcase-indicator {
+    width: 5px;
+    height: 5px;
+  }
+
+  .showcase .showcase-slide {
+    flex-direction: row;
+    gap: 56px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .showcase .showcase-media {
+    flex: 1 1 50%;
+    max-width: 560px;
+    border-radius: 32px;
+  }
+
+  .showcase .showcase-content-frame {
+    flex: 1 1 50%;
+    max-width: 540px;
+    padding: 56px 48px;
+  }
+
+  .showcase .showcase-heading {
+    font-size: 38px;
+    margin-bottom: 24px;
+  }
+
+  .showcase .showcase-badge {
+    width: 52px;
+    height: 52px;
+    font-size: 21px;
+  }
+}
+
+/* Large Desktop (min-width: 1200px) */
+@media (width >= 1200px) {
+  .showcase .showcase-slide {
+    gap: 72px;
+  }
+
+  .showcase .showcase-media {
+    max-width: 620px;
+  }
+
+  .showcase .showcase-content-frame {
+    max-width: 580px;
+    padding: 64px 56px;
+  }
+
+  .showcase .showcase-heading {
+    font-size: 42px;
+  }
+}
