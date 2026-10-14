@@ -79,35 +79,14 @@ export default function decorate(block) {
       const paragraphs = [...body.querySelectorAll('p')];
       paragraphs.forEach((p, idx) => {
         const link = p.querySelector('a');
-        const textOnly = p.textContent.trim();
 
         // Check if paragraph is an eyebrow (comes before the first heading, short text, uppercase)
         if (headings.length > 0 && idx === 0 && !p.querySelector('picture') && !link) {
           p.classList.add('showcase-eyebrow');
-        } else if (link && (textOnly === link.textContent.trim() || textOnly.length <= 4)) {
-          // Action badge / link
-          p.classList.add('showcase-badge-wrapper');
-          link.classList.add('showcase-badge');
-          if (!link.textContent.trim()) {
-            link.textContent = 'V';
-          }
         } else if (!p.classList.contains('button-wrapper')) {
           p.classList.add('showcase-description');
         }
       });
-
-      // Ensure a badge exists if none was authored
-      if (!body.querySelector('.showcase-badge')) {
-        const defaultBadgeWrapper = document.createElement('p');
-        defaultBadgeWrapper.className = 'showcase-badge-wrapper';
-        const defaultBadge = document.createElement('a');
-        defaultBadge.href = '#';
-        defaultBadge.className = 'showcase-badge';
-        defaultBadge.setAttribute('aria-label', 'Explore showcase feature');
-        defaultBadge.textContent = 'V';
-        defaultBadgeWrapper.append(defaultBadge);
-        body.append(defaultBadgeWrapper);
-      }
     }
 
     frame.append(body);
