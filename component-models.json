@@ -11,8 +11,32 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "pageTitle",
+        "label": "SEO Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "jcr:description",
         "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "seoDescription",
+        "label": "SEO Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "canonical",
+        "label": "Canonical URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "theme",
+        "label": "Theme"
       },
       {
         "component": "text",

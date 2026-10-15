@@ -9,6 +9,8 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  getMetadata,
+  readBlockConfig,
 } from './aem.js';
 
 /**
@@ -123,13 +125,86 @@ export function decorateMain(main) {
 }
 
 /**
+ * Decorates custom page metadata (SEO Title, SEO Description, Canonical URL).
+ */
+function decorateCustomMetadata() {
+  const seoTitle = getMetadata('pagetitle')
+    || getMetadata('page-title')
+    || getMetadata('seotitle')
+    || getMetadata('seo-title');
+  if (seoTitle) {
+    document.title = seoTitle;
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+      ogTitle = document.createElement('meta');
+      ogTitle.setAttribute('property', 'og:title');
+      document.head.append(ogTitle);
+    }
+    ogTitle.setAttribute('content', seoTitle);
+  }
+
+  const seoDescription = getMetadata('seodescription')
+    || getMetadata('seo-description');
+  if (seoDescription) {
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.append(metaDesc);
+    }
+    metaDesc.setAttribute('content', seoDescription);
+
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+      ogDesc = document.createElement('meta');
+      ogDesc.setAttribute('property', 'og:description');
+      document.head.append(ogDesc);
+    }
+    ogDesc.setAttribute('content', seoDescription);
+  }
+
+  const canonical = getMetadata('canonical')
+    || getMetadata('canonicalurl')
+    || getMetadata('canonical-url');
+  if (canonical) {
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      document.head.append(link);
+    }
+    try {
+      link.setAttribute('href', new URL(canonical, window.location.href).href);
+    } catch {
+      link.setAttribute('href', canonical);
+    }
+  }
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  decorateTemplateAndTheme();
   const main = doc.querySelector('main');
+  if (main) {
+    const metaBlock = main.querySelector('.metadata');
+    if (metaBlock) {
+      const config = readBlockConfig(metaBlock);
+      Object.entries(config).forEach(([key, value]) => {
+        if (!getMetadata(key)) {
+          const meta = document.createElement('meta');
+          meta.setAttribute('name', key);
+          meta.setAttribute('content', value);
+          document.head.append(meta);
+        }
+      });
+      metaBlock.remove();
+    }
+  }
+  decorateTemplateAndTheme();
+  decorateCustomMetadata();
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
